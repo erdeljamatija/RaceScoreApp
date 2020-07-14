@@ -1,0 +1,45 @@
+﻿@page "{id:int?}"
+@model RaceScore.Pages.RaceResultsModel
+@{
+    ViewData["Title"] = "RaceResults";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@{ int rowNo = 0; }
+
+<h2>Službeni rezultati</h2>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-uppercase">
+                    <i class="fa fa-flag"></i> Rezultati  -  @Model.Race.Name
+                </div>
+                <div class="card-body">
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ime</th>
+                                <th scope="col">Prezime</th>
+                                <th scope="col">Vrijeme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var result in Model.RaceResultList)
+                            {
+                                <tr>
+                                    <th>@(rowNo += 1)</th>
+                                    <th>@result.FirstName</th>
+                                    <td>@result.LastName</td>
+                                    <td>@result.ResultTime</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@page
+@model RaceScore.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Login</h1>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    Username: <input asp-for="loginData.Username" value="" /><br />
+    Password: <input asp-for="loginData.Password" value="" /><br />
+    Remember me: <input asp-for="loginData.RememberMe" type="checkbox" /><br />
+    <input type="submit" value="Login" />
+    @Html.AntiForgeryToken()
+</form>

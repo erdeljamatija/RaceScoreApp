@@ -1,0 +1,61 @@
+﻿@page
+@model RaceScore.Pages.AdminRaceResultsModel
+@{
+    ViewData["Title"] = "AdminRaceResults";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@{ int rowNo = 0; }
+
+<h2>Administracija rezultata</h2>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-uppercase">
+                    <i class="fa fa-flag"></i> Neobrađeni rezultati  -  @Model.RaceName
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ime</th>
+                                <th scope="col">Prezime</th>
+                                <th scope="col">Vrijeme</th>
+                                <th scope="col">Odobreno</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var result in Model.RaceResultList)
+                            {
+                            <tr>
+                                <th>@(rowNo += 1)</th>
+                                <th>@result.FirstName</th>
+                                <td>@result.LastName</td>
+                                <td>@result.ResultTime</td>
+                                <td>@result.Approved</td>
+                                @if (result.Approved == false)
+                                {
+                                    <td>
+                                        <form method="post" asp-page-handler="ApproveRaceResult" asp-route-raceResultId="@result.Id" asp-route-raceId="@result.RaceRefId">
+                                            <button>Odobri</button>
+                                        </form>
+                                    </td>
+                                }
+                                <td>
+                                    <form method="post" asp-page-handler="DeleteRaceResult" asp-route-raceResultId="@result.Id" asp-route-raceId="@result.RaceRefId" onsubmit="return confirm('Želite li obrisati rezultat?');">
+                                        <button>Obriši</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

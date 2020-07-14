@@ -1,0 +1,57 @@
+﻿@page
+@model IndexModel
+@{ ViewData["Title"] = "Home page"; }
+
+<hr />
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-uppercase">
+                    <i class="fa fa-flag"></i> Sve utrke
+                </div>
+                <div class="card-body">
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Naziv utrke</th>
+                                @*<th scope="col">Aktivna</th>*@
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <th scope="col"></th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var race in Model.RaceList.Take(10))
+                            {
+                            <tr>
+                                <th scope="row">@race.Id</th>
+                                <td>@race.Name</td>
+                                @*<td>@race.Active</td>*@
+                                <td>
+                                    <a asp-page="./RaceResults" asp-route-id="@race.Id">Pogledaj rezultate</a>
+                                </td>
+                                <td>
+                                    <a asp-page="./SubmitRaceResult" asp-route-id="@race.Id">Prijavi vrijeme</a>
+                                </td>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <td>
+                                        <a asp-page="./AdminRaceResults" asp-route-id="@race.Id">Administracija</a>
+                                    </td>
+                                }
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

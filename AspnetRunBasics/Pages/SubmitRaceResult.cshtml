@@ -1,0 +1,26 @@
+﻿@page "{id:int?}"
+@model RaceScore.Pages.SubmitRaceResultModel
+@{
+    ViewData["Title"] = "SubmitRaceResult";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Prijavite vrijeme utrke</h2>
+
+<hr />
+<div>
+    <h3>@Model.RaceName</h3>
+    <br />
+    <form asp-page-handler="submitraceresult" method="post">
+        <input class="form-control" type="text" asp-for="RaceResult.FirstName" value="" placeholder="Ime" required />
+        <input class="form-control" type="text" asp-for="RaceResult.LastName" value="" placeholder="Prezime" required />
+        <input class="form-control" type="time" step="1" asp-for="RaceResult.ResultTime" value="" placeholder="Vrijeme" required />
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Prijavi vrijeme</button>
+        <input type="hidden" asp-for="RaceResult" name="raceResult" />
+    </form>
+    @if (@Model.ShowMessage != false && @Model.ShowMessage)
+    {
+        <br /><hr />
+        <h3>Uspješno ste prijavili svoje vrijeme. Pričekajte odobrenje od administratora.</h3>
+    }
+</div>

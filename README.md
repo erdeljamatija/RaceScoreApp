@@ -1,3 +1,6 @@
+RaceScoreApp
+- simple C#.NET app for keeping race results
+
 RaceScoreApp SETUP
 ------------------------
 In appsettings.json file change path to SQL Server. Then, start a EF migration. It creates database,
